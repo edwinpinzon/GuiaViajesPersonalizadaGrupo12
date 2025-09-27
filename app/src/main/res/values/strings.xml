@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">TravelPal</string>
+
+    <!-- Navigation Drawer Menu -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Menu Items -->
+    <string name="menu_home">Inicio</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_photos">Fotos</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_web">Web</string>
+    <string name="menu_buttons">Botones</string>
+    <string name="menu_additional">Adicional</string>
+    <string name="menu_settings">Configuración</string>
+    <string name="menu_logout">Cerrar Sesión</string>
+
+    <!-- Main Activity -->
+    <string name="action_settings">Settings</string>
+
+    <!-- Home Fragment -->
+    <string name="title_home">Discover Your Next Adventure</string>
+    <string name="subtitle_home">Plan unforgettable trips with AI-powered recommendations and local insights from travelers worldwide.</string>
+    <string name="where_to_go">¿A dónde quieres ir?</string>
+    <string name="when_travel">¿Cuándo viajas?</string>
+    <string name="travelers">Viajeros</string>
+    <string name="search_destinations">Buscar Destinos</string>
+    <string name="popular_destinations">Destinos Populares</string>
+    <string name="view_all">Ver Todo</string>
+
+    <!-- Login Activity -->
+    <string name="welcome_back">¡Bienvenido de vuelta!</string>
+    <string name="sign_in_subtitle">Inicia sesión para continuar tu viaje</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="sign_in">Iniciar Sesión</string>
+    <string name="continue_as_guest">Continuar como Invitado</string>
+    <string name="dont_have_account">¿No tienes una cuenta?</string>
+    <string name="sign_up">Regístrate</string>
+
+    <!-- Profile Fragment -->
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="share_profile">Compartir</string>
+    <string name="travel_statistics">Estadísticas de Viaje</string>
+    <string name="trips">Viajes</string>
+    <string name="countries">Países</string>
+    <string name="reviews">Reseñas</string>
+    <string name="photos">Fotos</string>
+    <string name="education">Educación</string>
+    <string name="professional_experience">Experiencia Profesional</string>
+    <string name="settings">Configuración</string>
+
+    <!-- Photo Fragment -->
+    <string name="photo_gallery">Galería de Fotos</string>
+    <string name="my_travel_photos">Mis Fotos de Viaje</string>
+    <string name="add_photo">Agregar Foto</string>
+    <string name="select_photo_source">Seleccionar origen de la foto</string>
+    <string name="camera">Cámara</string>
+    <string name="gallery">Galería</string>
+
+    <!-- Video Fragment -->
+    <string name="travel_videos">Videos de Viaje</string>
+    <string name="play_video">Reproducir Video</string>
+    <string name="pause_video">Pausar Video</string>
+    <string name="video_controls">Controles de Video</string>
+
+    <!-- Web Fragment -->
+    <string name="web_browser">Navegador Web</string>
+    <string name="enter_url">Ingresa una URL</string>
+    <string name="go">Ir</string>
+    <string name="back">Atrás</string>
+    <string name="forward">Adelante</string>
+    <string name="refresh">Actualizar</string>
+
+    <!-- Buttons Fragment -->
+    <string name="interactive_buttons">Botones Interactivos</string>
+    <string name="button_1">Botón 1</string>
+    <string name="button_2">Botón 2</string>
+    <string name="button_3">Botón 3</string>
+    <string name="button_4">Botón 4</string>
+    <string name="button_5">Botón 5</string>
+    <string name="button_6">Botón 6</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="loading">Cargando...</string>
+    <string name="error">Error</string>
+    <string name="success">Éxito</string>
+    <string name="retry">Reintentar</string>
+
+    <!-- Validation Messages -->
+    <string name="field_required">Este campo es obligatorio</string>
+    <string name="invalid_email">Formato de email inválido</string>
+    <string name="password_too_short">La contraseña debe tener al menos 6 caracteres</string>
+
+    <!-- Destinations -->
+    <string name="tokyo">Tokio</string>
+    <string name="paris">París</string>
+    <string name="new_york">Nueva York</string>
+    <string name="london">Londres</string>
+    <string name="madrid">Madrid</string>
+    <string name="rome">Roma</string>
+
+    <!-- Price Ranges -->
+    <string name="from_price">Desde %1$s</string>
+    <string name="price_1599">$1,599</string>
+    <string name="price_1299">$1,299</string>
+    <string name="price_899">$899</string>
+    <string name="price_1199">$1,199</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+
+    <!-- Navigation Header -->
+    <string name="nav_header_title">TravelPal</string>
+    <string name="nav_header_subtitle">Tu guía de viajes personalizada</string>
+    <string name="nav_header_desc">Usuario de TravelPal</string>
+
+</resources>

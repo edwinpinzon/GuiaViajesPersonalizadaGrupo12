@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    tools:context=".ui.web.WebFragment">
+
+    <!-- Barra de herramientas del navegador -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="0dp"
+        app:cardBackgroundColor="@color/blue_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <!-- Fila superior: navegación y controles -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_navigation_controls"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Botón Atrás -->
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_media_previous"
+                    android:background="@drawable/circle_button_blue"
+                    android:contentDescription="Atrás"
+                    android:scaleType="centerInside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Botón Adelante -->
+                <ImageButton
+                    android:id="@+id/btn_forward"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_media_next"
+                    android:background="@drawable/circle_button_blue"
+                    android:contentDescription="Adelante"
+                    android:scaleType="centerInside"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@id/btn_back"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Botón Actualizar -->
+                <ImageButton
+                    android:id="@+id/btn_refresh"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_popup_sync"
+                    android:background="@drawable/circle_button_blue"
+                    android:contentDescription="Actualizar"
+                    android:scaleType="centerInside"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@id/btn_forward"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Botón Inicio -->
+                <ImageButton
+                    android:id="@+id/btn_home"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_menu_home"
+                    android:background="@drawable/circle_button_blue"
+                    android:contentDescription="Inicio"
+                    android:scaleType="centerInside"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@id/btn_refresh"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Título del navegador -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="🌐 Navegador Web"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_home"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_home"
+                    app:layout_constraintTop_toTopOf="@id/btn_home" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Barra de dirección -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_address_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_navigation_controls">
+
+                <!-- Campo URL -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_url"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:layout_constraintEnd_toStartOf="@id/btn_go"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingresa URL o busca en Google"
+                        android:inputType="textUri"
+                        android:imeOptions="actionGo"
+                        android:singleLine="true"
+                        android:selectAllOnFocus="true"
+                        android:drawableStart="@android:drawable/ic_menu_search"
+                        android:drawablePadding="8dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Botón Ir -->
+                <Button
+                    android:id="@+id/btn_go"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:text="Ir"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/blue_accent"
+                    android:minWidth="60dp"
+                    app:cornerRadius="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Título de la página -->
+    <TextView
+        android:id="@+id/tv_page_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Google"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:background="@color/blue_secondary"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_toolbar" />
+
+    <!-- Barra de progreso -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:max="100"
+        android:progress="0"
+        android:progressTint="@color/blue_accent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_page_title" />
+
+    <!-- WebView -->
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/card_quick_sites"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+
+    <!-- Barra inferior con sitios de viaje rápidos -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_quick_sites"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="0dp"
+        app:cardBackgroundColor="@color/blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_quick_sites_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="🌍 Sitios de viaje populares"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_quick_sites"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_quick_sites_title">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_booking"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking"
+                        android:textSize="10sp"
+                        android:textColor="@color/blue_dark"
+                        android:minWidth="70dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_tripadvisor"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TripAdvisor"
+                        android:textSize="10sp"
+                        android:textColor="@color/blue_dark"
+                        android:minWidth="70dp"
+                        app:layout_constraintStart_toEndOf="@id/btn_booking"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_airbnb"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Airbnb"
+                        android:textSize="10sp"
+                        android:textColor="@color/blue_dark"
+                        android:minWidth="70dp"
+                        app:layout_constraintStart_toEndOf="@id/btn_tripadvisor"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_skyscanner"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Skyscanner"
+                        android:textSize="10sp"
+                        android:textColor="@color/blue_dark"
+                        android:minWidth="70dp"
+                        app:layout_constraintStart_toEndOf="@id/btn_airbnb"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/btn_lonely_planet"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="L.Planet"
+                        android:textSize="10sp"
+                        android:textColor="@color/blue_dark"
+                        android:minWidth="70dp"
+                        app:layout_constraintStart_toEndOf="@id/btn_skyscanner"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

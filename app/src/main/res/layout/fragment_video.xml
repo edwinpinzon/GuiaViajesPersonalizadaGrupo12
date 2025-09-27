@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    tools:context=".ui.video.VideoFragment">
+
+    <!-- ScrollView para contenido scrolleable -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Título Principal -->
+            <TextView
+                android:id="@+id/tv_main_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Videos de Viaje"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_primary"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Card Principal del Video -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_video_player"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_main_title">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Contenedor del VideoView -->
+                    <FrameLayout
+                        android:id="@+id/frame_video_container"
+                        android:layout_width="0dp"
+                        android:layout_height="250dp"
+                        android:background="@android:color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <!-- VideoView -->
+                        <VideoView
+                            android:id="@+id/video_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center" />
+
+                        <!-- ProgressBar de carga -->
+                        <ProgressBar
+                            android:id="@+id/progress_bar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:visibility="visible" />
+
+                        <!-- Overlay de controles -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/gradient_overlay"
+                            android:padding="12dp">
+
+                            <!-- Botón Volumen Bajo -->
+                            <Button
+                                android:id="@+id/btn_volume_down"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:text="🔉"
+                                android:textSize="16sp"
+                                android:background="@drawable/circle_button"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!-- Botón Play/Pause Principal -->
+                            <Button
+                                android:id="@+id/btn_play"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:text="▶️ Reproducir"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:backgroundTint="@color/blue_primary"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="24dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/btn_volume_up"
+                                app:layout_constraintStart_toEndOf="@id/btn_volume_down"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <!-- Botón Volumen Alto -->
+                            <Button
+                                android:id="@+id/btn_volume_up"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:text="🔊"
+                                android:textSize="16sp"
+                                android:background="@drawable/circle_button"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </FrameLayout>
+
+                    <!-- Información del Video -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_video_info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/frame_video_container">
+
+                        <TextView
+                            android:id="@+id/tv_video_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Destinos Increíbles"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue_primary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_video_description"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Descubre los destinos más hermosos del mundo en este increíble recorrido visual"
+                            android:textSize="14sp"
+                            android:textColor="@color/blue_secondary"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_title" />
+
+                        <!-- Botones de Acción -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layout_action_buttons"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_description">
+
+                            <Button
+                                android:id="@+id/btn_fullscreen"
+                                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="📺 Pantalla Completa"
+                                android:textSize="12sp"
+                                android:textColor="@color/blue_primary"
+                                app:strokeColor="@color/blue_primary"
+                                android:layout_marginEnd="8dp"
+                                app:cornerRadius="8dp"
+                                app:layout_constraintEnd_toStartOf="@id/btn_share"
+                                app:layout_constraintHorizontal_chainStyle="spread"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/btn_share"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="📤 Compartir"
+                                android:textSize="12sp"
+                                android:textColor="@android:color/white"
+                                android:backgroundTint="@color/blue_button"
+                                android:layout_marginStart="8dp"
+                                app:cornerRadius="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/btn_fullscreen"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card de Videos Relacionados -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_related_videos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_video_player">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_related_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="🎥 Videos Relacionados"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue_primary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Video Relacionado 1 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_video_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="12dp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_related_title">
+
+                        <ImageView
+                            android:id="@+id/iv_video_1"
+                            android:layout_width="80dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/ic_play_circle"
+                            android:background="@color/blue_light"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_video_1_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Aventuras en Tokio"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue_primary"
+                            android:layout_marginStart="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_1"
+                            app:layout_constraintTop_toTopOf="@id/iv_video_1" />
+
+                        <TextView
+                            android:id="@+id/tv_video_1_desc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Explora la capital japonesa"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_secondary"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_1"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_1_title" />
+
+                        <TextView
+                            android:id="@+id/tv_video_1_duration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="⏱️ 5:32 min"
+                            android:textSize="11sp"
+                            android:textColor="@color/blue_text"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_1"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_1_desc" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Video Relacionado 2 -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_video_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="12dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_video_1">
+
+                        <ImageView
+                            android:id="@+id/iv_video_2"
+                            android:layout_width="80dp"
+                            android:layout_height="60dp"
+                            android:src="@drawable/ic_play_circle"
+                            android:background="@color/blue_soft"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_video_2_title"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="París Romántico"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue_primary"
+                            android:layout_marginStart="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_2"
+                            app:layout_constraintTop_toTopOf="@id/iv_video_2" />
+
+                        <TextView
+                            android:id="@+id/tv_video_2_desc"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="La ciudad del amor"
+                            android:textSize="12sp"
+                            android:textColor="@color/blue_secondary"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_2"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_2_title" />
+
+                        <TextView
+                            android:id="@+id/tv_video_2_duration"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="⏱️ 7:18 min"
+                            android:textSize="11sp"
+                            android:textColor="@color/blue_text"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="2dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/iv_video_2"
+                            app:layout_constraintTop_toBottomOf="@id/tv_video_2_desc" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

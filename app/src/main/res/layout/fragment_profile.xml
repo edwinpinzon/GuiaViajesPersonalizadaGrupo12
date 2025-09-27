@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    tools:context=".ui.profile.ProfileFragment">
+
+    <!-- ScrollView para contenido scrolleable -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Título Principal -->
+            <TextView
+                android:id="@+id/tv_main_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="👤 Mi Perfil"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#6200EE"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Card de Información Personal -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_personal_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_main_title">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="24dp">
+
+                    <!-- Foto de Perfil -->
+                    <ImageView
+                        android:id="@+id/iv_profile_picture"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:background="@drawable/circle_background"
+                        android:padding="20dp"
+                        android:scaleType="centerInside"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!-- Nombre Usuario -->
+                    <TextView
+                        android:id="@+id/tv_user_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Juan Carlos Pérez"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:gravity="center"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_profile_picture" />
+
+                    <!-- Email -->
+                    <TextView
+                        android:id="@+id/tv_user_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="jcarlos.perez@email.com"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+
+                    <!-- Ubicación -->
+                    <TextView
+                        android:id="@+id/tv_user_location"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Tabio, Cundinamarca, Colombia"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:gravity="center"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_user_email" />
+
+                    <!-- Estadísticas de Viaje -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_travel_stats"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/stats_background"
+                        android:padding="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_user_location">
+
+                        <!-- Viajes -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/stat_trips"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toStartOf="@id/stat_countries"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_trips_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="12"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#6200EE"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_trips_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Viajes"
+                                android:textSize="12sp"
+                                android:textColor="@android:color/darker_gray"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_trips_count" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!-- Países -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/stat_countries"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toStartOf="@id/stat_photos"
+                            app:layout_constraintStart_toEndOf="@id/stat_trips"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_countries_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="8"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#6200EE"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_countries_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Países"
+                                android:textSize="12sp"
+                                android:textColor="@android:color/darker_gray"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_countries_count" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!-- Fotos -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/stat_photos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/stat_countries"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tv_photos_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="156"
+                                android:textSize="24sp"
+                                android:textStyle="bold"
+                                android:textColor="#6200EE"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_photos_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Fotos"
+                                android:textSize="12sp"
+                                android:textColor="@android:color/darker_gray"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_photos_count" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Botones de Acción -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_action_buttons"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_travel_stats">
+
+                        <Button
+                            android:id="@+id/btn_edit_profile"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Editar Perfil"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="8dp"
+                            app:cornerRadius="8dp"
+                            app:layout_constraintEnd_toStartOf="@id/btn_share_profile"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btn_share_profile"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Compartir"
+                            android:textSize="14sp"
+                            android:layout_marginStart="8dp"
+                            app:cornerRadius="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/btn_edit_profile"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card de Educación -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_education"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_personal_info">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_education_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Educación"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#6200EE"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_education"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Ingeniería de Sistemas\nUniversidad Nacional de Colombia (2018-2022)\n\n🏆 Especialización en Desarrollo de Software\nUniversidad de los Andes (2023-2024)\n\n📚 Certificaciones:\n• AWS Solutions Architect Associate\n• Google Cloud Professional Developer\n• Scrum Master Certified"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_education_title" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Card de Experiencia -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_experience"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_education"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_experience_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Experiencia Profesional"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#6200EE"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_experience"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Desarrollador Full Stack Senior\nTechCorp Solutions (2022 - Presente)\n• Desarrollo de aplicaciones web y móviles\n• Liderazgo de equipos de desarrollo\n• Implementación de metodologías ágiles\n\n👨‍💻 Desarrollador Junior\nStartupTech (2021 - 2022)\n• Desarrollo de APIs REST\n• Mantenimiento de bases de datos\n• Soporte técnico a usuarios\n\n🎯 Freelancer\nDiversos proyectos (2020 - 2021)\n• Desarrollo de sitios web corporativos\n• Aplicaciones móviles para pequeñas empresas\n• Consultoría en transformación digital"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_experience_title" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

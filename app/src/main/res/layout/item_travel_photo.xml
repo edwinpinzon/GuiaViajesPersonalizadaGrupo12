@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Imagen principal -->
+        <ImageView
+            android:id="@+id/iv_travel_photo"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_image_placeholder"
+            android:scaleType="centerCrop"
+            android:background="@color/blue_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Overlay para botones en la imagen -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_photo_overlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/photo_overlay_gradient"
+            app:layout_constraintBottom_toBottomOf="@id/iv_travel_photo"
+            app:layout_constraintEnd_toEndOf="@id/iv_travel_photo"
+            app:layout_constraintStart_toStartOf="@id/iv_travel_photo"
+            app:layout_constraintTop_toTopOf="@id/iv_travel_photo">
+
+            <!-- Botón favorito -->
+            <ImageButton
+                android:id="@+id/btn_favorite"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_favorite_border"
+                android:background="@drawable/circle_white_semi_transparent"
+                android:scaleType="centerInside"
+                android:layout_margin="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_favorite_filled" />
+
+            <!-- Indicador de localización -->
+            <LinearLayout
+                android:id="@+id/layout_location_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/location_badge_background"
+                android:padding="6dp"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:src="@android:drawable/ic_menu_mylocation"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tv_photo_location_overlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="París"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    tools:text="París" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Contenido de información -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_photo_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_travel_photo">
+
+            <!-- Título de la foto -->
+            <TextView
+                android:id="@+id/tv_photo_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Atardecer en París"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Atardecer en París" />
+
+            <!-- Ubicación -->
+            <LinearLayout
+                android:id="@+id/layout_location_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_photo_title">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@android:drawable/ic_menu_mylocation"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@color/blue_secondary" />
+
+                <TextView
+                    android:id="@+id/tv_photo_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="París, Francia"
+                    android:textSize="12sp"
+                    android:textColor="@color/blue_secondary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="París, Francia" />
+
+            </LinearLayout>
+
+            <!-- Fecha y hora -->
+            <LinearLayout
+                android:id="@+id/layout_date_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_location_info">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@android:drawable/ic_menu_today"
+                    android:layout_marginEnd="4dp"
+                    app:tint="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/tv_photo_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="15/12/2024 18:30"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="15/12/2024 18:30" />
+
+            </LinearLayout>
+
+            <!-- Separador -->
+            <View
+                android:id="@+id/divider_actions"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/blue_light"
+                android:alpha="0.3"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_date_info" />
+
+            <!-- Botones de acción -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_actions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_actions">
+
+                <!-- Botón ver -->
+                <LinearLayout
+                    android:id="@+id/btn_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintEnd_toStartOf="@id/btn_share"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/ic_menu_view"
+                        android:layout_marginEnd="4dp"
+                        app:tint="@color/blue_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ver"
+                        android:textSize="12sp"
+                        android:textColor="@color/blue_primary"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Botón compartir -->
+                <LinearLayout
+                    android:id="@+id/btn_share"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintEnd_toStartOf="@id/btn_delete"
+                    app:layout_constraintStart_toEndOf="@id/btn_view"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:layout_marginEnd="4dp"
+                        app:tint="@color/blue_secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Compartir"
+                        android:textSize="12sp"
+                        android:textColor="@color/blue_secondary"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Botón eliminar -->
+                <LinearLayout
+                    android:id="@+id/btn_delete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_share"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/ic_menu_delete"
+                        android:layout_marginEnd="4dp"
+                        app:tint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminar"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

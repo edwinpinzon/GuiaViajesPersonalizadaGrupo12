@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores principales - TODO EN AZUL -->
+    <color name="purple_200">#42A5F5</color>        <!-- Azul claro Material Design -->
+    <color name="purple_500">#1976D2</color>        <!-- Azul principal Material Design -->
+    <color name="purple_700">#0D47A1</color>        <!-- Azul oscuro Material Design -->
+
+    <!-- Colores teal - TAMBIÉN EN AZUL -->
+    <color name="teal_200">#81C784</color>          <!-- Azul verdoso claro -->
+    <color name="teal_700">#388E3C</color>          <!-- Azul verdoso oscuro -->
+
+    <!-- Colores básicos -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta principal de azules - ARMONÍA COMPLETA -->
+    <color name="blue_primary">#1976D2</color>          <!-- Azul principal -->
+    <color name="blue_primary_dark">#1565C0</color>     <!-- Azul principal oscuro -->
+    <color name="blue_secondary">#42A5F5</color>        <!-- Azul secundario -->
+    <color name="blue_accent">#2196F3</color>           <!-- Azul de acento -->
+    <color name="blue_light">#E3F2FD</color>            <!-- Azul muy claro -->
+    <color name="blue_medium">#90CAF9</color>           <!-- Azul medio -->
+    <color name="blue_dark">#0D47A1</color>             <!-- Azul muy oscuro -->
+
+    <!-- Variaciones complementarias de azul -->
+    <color name="blue_soft">#BBDEFB</color>             <!-- Azul suave -->
+    <color name="blue_text">#1E88E5</color>             <!-- Azul para texto -->
+    <color name="blue_button">#2979FF</color>           <!-- Azul vibrante para botones -->
+
+    <!-- Colores de estado - CAMBIADOS A TONOS AZULES -->
+    <color name="green_success">#4FC3F7</color>         <!-- Azul claro para éxito -->
+    <color name="red_error">#1565C0</color>             <!-- Azul medio para errores -->
+    <color name="orange_warning">#42A5F5</color>        <!-- Azul secundario para advertencias -->
+</resources>
