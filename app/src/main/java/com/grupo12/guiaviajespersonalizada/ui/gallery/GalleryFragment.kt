@@ -86,18 +86,18 @@ class GalleryFragment : Fragment() {
                 description = "La Torre Eiffel iluminada al atardecer",
                 location = "París, Francia",
                 date = "2025-09-21",
-                imageRes = R.drawable.ic_image_placeholder,
+                imageRes = R.drawable.atardecerenparis,
                 isFavorite = true,
                 tags = listOf("París", "Torre Eiffel", "Atardecer"),
                 cameraInfo = "iPhone 13 Pro Max"
             ),
             TravelPhoto(
                 id = 2,
-                title = "Templo Senso-ji",
+                    title = "Templo Senso-ji",
                 description = "Templo tradicional en Asakusa",
                 location = "Tokio, Japón",
                 date = "2025-09-20",
-                imageRes = R.drawable.ic_image_placeholder,
+                imageRes = R.drawable.templosenso_ji,
                 isFavorite = false,
                 tags = listOf("Tokio", "Templo", "Cultura"),
                 cameraInfo = "Canon EOS R6"
