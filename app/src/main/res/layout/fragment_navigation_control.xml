@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título Principal -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="App Guide &amp; Controls"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complete guide to using TravelPal's features and navigation"
+            android:textSize="14sp"
+            android:textColor="@color/secondary_text"
+            android:gravity="center"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Sección: Instrucciones de Navegación -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Navigation Instructions"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón Menu Navigation -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_menu_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="☰ Menu Navigation"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_menu"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Search Instructions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Button"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_search"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Favorite Instructions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_favorite_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favorite Button"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_favorite"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Share Instructions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Button"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_share"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Filter Instructions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_filter_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Filter Button"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="24dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_filter"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Divisor -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Sección: Feature Explanations -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feature Explanations"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón Profile Explanation -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_profile_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Profile Customization"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_person"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Photos Explanation -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_photos_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Photos Functionality"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_photo"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Video Explanation -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_video_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Video Player"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_videocam"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Botón Web Explanation -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_web_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Web Browsing Functionality"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="24dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_web"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+        <!-- Divisor -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginVertical="16dp" />
+
+        <!-- Sección: Ayuda Adicional -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Additional Help"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_text"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón Interactive Demo -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_interactive_demo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚀 Interactive Demo"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_play_arrow"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button" />
+
+        <!-- Botón Additional Help -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_additional_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="❓ Need More Help?"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="16dp"
+            android:paddingVertical="16dp"
+            app:icon="@drawable/ic_help"
+            app:iconGravity="start"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
+
+    </LinearLayout>
+</ScrollView>

@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_gallery,
                 R.id.nav_video,
                 R.id.nav_web,
+                R.id.nav_buttons,    // ✅ agregado aquí
                 R.id.nav_slideshow
             ), drawerLayout
         )
@@ -133,6 +134,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_web -> {
                     Log.d("NAV_DEBUG", "Navegando -> WebFragment")
                     navController.navigate(R.id.nav_web)
+                    drawerLayout.closeDrawers()
+                    true
+                }
+                R.id.nav_buttons -> {
+                    Log.d("NAV_DEBUG", "Navegando -> NavigationControlFragment")
+                    navController.navigate(R.id.nav_buttons)
                     drawerLayout.closeDrawers()
                     true
                 }

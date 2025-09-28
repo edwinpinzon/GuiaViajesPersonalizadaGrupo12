@@ -30,5 +30,14 @@
     <!-- Colores de estado - CAMBIADOS A TONOS AZULES -->
     <color name="green_success">#4FC3F7</color>         <!-- Azul claro para éxito -->
     <color name="red_error">#1565C0</color>             <!-- Azul medio para errores -->
-    <color name="orange_warning">#42A5F5</color>        <!-- Azul secundario para advertencias -->
+    <color name="orange_warning">#42A5F5</color><!-- Azul secundario para advertencias -->
+
+    <color name="background_light">#F5F5F5</color>
+
+    <!-- Colores de texto -->
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+
+    <!-- Color divisor -->
+    <color name="divider_color">#E0E0E0</color>
 </resources>

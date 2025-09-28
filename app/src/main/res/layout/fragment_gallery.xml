@@ -7,7 +7,7 @@
     android:background="#F8F9FA"
     tools:context=".ui.gallery.GalleryFragment">
 
-    <!-- Header con título y controles -->
+    <!-- Header con título -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_header"
         android:layout_width="0dp"
@@ -32,19 +32,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                app:layout_constraintEnd_toStartOf="@id/btn_change_view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btn_change_view"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🎯 Vista"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

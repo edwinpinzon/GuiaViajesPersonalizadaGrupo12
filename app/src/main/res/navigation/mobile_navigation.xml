@@ -37,9 +37,9 @@
 
     <fragment
         android:id="@+id/nav_buttons"
-        android:name="com.grupo12.guiaviajespersonalizada.ui.botones.BotonesFragment"
-        android:label="Botones"
-        tools:layout="@layout/fragment_slideshow" />
+        android:name="com.grupo12.guiaviajespersonalizada.ui.navigation.NavigationControlFragment"
+        android:label="Controles"
+        tools:layout="@layout/fragment_navigation_control" />
 
     <fragment
         android:id="@+id/nav_slideshow"

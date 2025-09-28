@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.grupo12.guiaviajespersonalizada.R
 import com.grupo12.guiaviajespersonalizada.databinding.FragmentGalleryBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -52,6 +51,7 @@ class GalleryFragment : Fragment() {
         return root
     }
 
+    // 🔹 Ahora fijo en LISTA (1 columna)
     private fun setupRecyclerView() {
         photosAdapter = TravelPhotosAdapter(photosList) { photo, action ->
             when (action) {
@@ -63,7 +63,7 @@ class GalleryFragment : Fragment() {
             }
         }
 
-        val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val layoutManager = GridLayoutManager(requireContext(), 1) // 👈 LISTA
         binding.rvPhotos.apply {
             this.layoutManager = layoutManager
             adapter = photosAdapter
@@ -73,7 +73,6 @@ class GalleryFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.fabAddPhoto.setOnClickListener { showPhotoSourceDialog() }
-        binding.btnChangeView.setOnClickListener { toggleViewMode() }
         binding.chipAllPhotos.setOnClickListener { filterPhotos(PhotoFilter.ALL) }
         binding.chipFavorites.setOnClickListener { filterPhotos(PhotoFilter.FAVORITES) }
         binding.chipRecent.setOnClickListener { filterPhotos(PhotoFilter.RECENT) }
@@ -151,7 +150,6 @@ class GalleryFragment : Fragment() {
     }
 
     private fun handleGalleryResult(uri: android.net.Uri) {
-        // Para mantener consistencia usamos drawable de ejemplo
         val newPhoto = TravelPhoto(
             id = System.currentTimeMillis().toInt(),
             title = "Foto importada ${photosList.size + 1}",
@@ -249,20 +247,6 @@ class GalleryFragment : Fragment() {
         if (position != -1) photosAdapter.notifyItemChanged(position)
         val message = if (photo.isFavorite) "💖 Agregada a favoritos" else "Removida de favoritos"
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun toggleViewMode() {
-        val layoutManager = binding.rvPhotos.layoutManager
-        when (layoutManager) {
-            is StaggeredGridLayoutManager -> {
-                binding.rvPhotos.layoutManager = GridLayoutManager(context, 1)
-                binding.btnChangeView.text = "📱 Grid"
-            }
-            is GridLayoutManager -> {
-                layoutManager.spanCount = if (layoutManager.spanCount == 1) 2 else 1
-                binding.btnChangeView.text = if (layoutManager.spanCount == 1) "📋 Lista" else "🎯 Masonry"
-            }
-        }
     }
 
     private fun filterPhotos(filter: PhotoFilter) {
