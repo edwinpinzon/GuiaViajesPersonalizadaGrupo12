@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.grupo12.guiaviajespersonalizada.R
 import com.grupo12.guiaviajespersonalizada.databinding.FragmentHomeBinding
 import com.google.android.material.snackbar.Snackbar
@@ -26,7 +27,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -38,21 +38,18 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    // 🔹 Configuración del buscador y chips
     private fun setupSearchFunction() {
-        // Configurar listeners para los campos de búsqueda
-        binding.btnSearchDestinations.setOnClickListener {
-            performSearch()
-        }
+        binding.btnSearchDestinations.setOnClickListener { performSearch() }
 
-        // Configurar chips de búsqueda rápida
         binding.chipParis.setOnClickListener { quickSearch("París") }
         binding.chipTokyo.setOnClickListener { quickSearch("Tokio") }
         binding.chipNewYork.setOnClickListener { quickSearch("Nueva York") }
         binding.chipLondon.setOnClickListener { quickSearch("Londres") }
     }
 
+    // 🔹 Configura la lista horizontal de destinos
     private fun setupPopularDestinations() {
-        // Configurar RecyclerView para destinos populares
         destinationsAdapter = PopularDestinationsAdapter { destination ->
             onDestinationClicked(destination)
         }
@@ -62,15 +59,26 @@ class HomeFragment : Fragment() {
             adapter = destinationsAdapter
         }
 
-        // Configurar botón "Ver todos"
         binding.btnViewAllDestinations.setOnClickListener {
             showAllDestinations()
         }
     }
 
+    // 🔹 Observadores del ViewModel (actualizados)
     private fun setupObservers() {
         homeViewModel.popularDestinations.observe(viewLifecycleOwner) { destinations ->
             destinationsAdapter.updateDestinations(destinations)
+
+            // Si se agregó un resultado de búsqueda, hacer scroll y mostrar aviso
+            val hasSearchResult = destinations.any { it.id == 999 }
+            if (hasSearchResult) {
+                binding.rvPopularDestinations.scrollToPosition(0)
+                Snackbar.make(
+                    binding.root,
+                    "🌍 Resultado agregado arriba en destinos",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
 
         homeViewModel.searchResults.observe(viewLifecycleOwner) { results ->
@@ -83,20 +91,18 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // 🔹 Carga inicial
     private fun loadInitialData() {
-        // Cargar datos iniciales
         homeViewModel.loadPopularDestinations()
-
-        // Mostrar mensaje de bienvenida
         showWelcomeMessage()
     }
 
+    // 🔹 Búsqueda con validaciones
     private fun performSearch() {
         val destination = binding.etWhereTo.text.toString().trim()
         val travelDate = binding.etWhenTravel.text.toString().trim()
         val travelers = binding.etTravelers.text.toString().trim()
 
-        // Validaciones básicas
         if (destination.isEmpty()) {
             binding.etWhereTo.error = "¿A dónde quieres ir?"
             binding.etWhereTo.requestFocus()
@@ -116,40 +122,42 @@ class HomeFragment : Fragment() {
             return
         }
 
-        // Realizar búsqueda
+        // 🔹 Ejecutar búsqueda (usa la versión mejorada del ViewModel)
         homeViewModel.searchDestinations(destination, travelDate, travelersCount)
 
-        // Limpiar errores
-        binding.etWhereTo.error = null
-        binding.etWhenTravel.error = null
-        binding.etTravelers.error = null
-
-        // Mostrar feedback
+        // Feedback visual
         showSearchFeedback(destination, travelDate, travelersCount)
+
+        // Cargar imagen de fondo del destino buscado
+        loadBackgroundImage(destination)
     }
 
     private fun quickSearch(destination: String) {
         binding.etWhereTo.setText(destination)
         binding.etWhenTravel.setText("Próximamente")
         binding.etTravelers.setText("2")
-
         performSearch()
     }
 
     private fun showSearchFeedback(destination: String, date: String, travelers: Int) {
-        val message = "🔍 Buscando viajes a $destination para $travelers ${if (travelers == 1) "persona" else "personas"}"
+        val message =
+            "🔍 Buscando viajes a $destination para $travelers ${if (travelers == 1) "persona" else "personas"}"
 
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
             .setAction("Ver resultados") {
-                // Mostrar resultados detallados
                 showDetailedResults(destination, date, travelers)
             }
             .show()
     }
 
+    // 🔹 Mostrar resultados
     private fun showSearchResults(results: List<SearchResult>) {
         if (results.isEmpty()) {
-            Toast.makeText(context, "No se encontraron resultados. Intenta con otro destino.", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                "No se encontraron resultados. Intenta con otro destino.",
+                Toast.LENGTH_LONG
+            ).show()
         } else {
             val message = "¡Encontramos ${results.size} opciones increíbles!"
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -176,26 +184,31 @@ class HomeFragment : Fragment() {
             .setTitle("Resultados de Búsqueda")
             .setMessage(results)
             .setPositiveButton("¡Perfecto!") { _, _ -> }
-            .setNeutralButton("Buscar más") { _, _ ->
-                // Limpiar campos para nueva búsqueda
-                clearSearchFields()
-            }
+            .setNeutralButton("Buscar más") { _, _ -> clearSearchFields() }
             .show()
     }
 
     private fun onDestinationClicked(destination: PopularDestination) {
-        // Llenar automáticamente la búsqueda con el destino seleccionado
         binding.etWhereTo.setText(destination.name)
         binding.etWhenTravel.setText("Próximamente")
         binding.etTravelers.setText("2")
 
         val message = "✈️ ${destination.name} seleccionado. Precio desde ${destination.price}"
-
         Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
-            .setAction("Buscar ahora") {
-                performSearch()
-            }
+            .setAction("Buscar ahora") { performSearch() }
             .show()
+
+        loadBackgroundImage(destination.name)
+    }
+
+    private fun loadBackgroundImage(query: String) {
+        val photoUrl = "https://source.unsplash.com/featured/?$query"
+
+        Glide.with(requireContext())
+            .load(photoUrl)
+            .centerCrop()
+            .error(R.drawable.ic_launcher_background)
+            .into(binding.ivBackgroundImage)
     }
 
     private fun showAllDestinations() {
@@ -210,7 +223,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun showWelcomeMessage() {
-        // Mostrar mensaje de bienvenida personalizado
         val welcomeMessages = listOf(
             "¡Bienvenido a TravelPal! 🌍 ¿Listo para tu próxima aventura?",
             "🛫 ¿A dónde te llevamos hoy?",
@@ -219,43 +231,39 @@ class HomeFragment : Fragment() {
         )
 
         val randomMessage = welcomeMessages.random()
-
         view?.postDelayed({
             Snackbar.make(binding.root, randomMessage, Snackbar.LENGTH_LONG)
                 .setAction("Explorar") {
                     binding.scrollView.smoothScrollTo(0, binding.rvPopularDestinations.top)
                 }
                 .show()
-        }, 1000) // Mostrar después de 1 segundo
+        }, 1000)
     }
 
-
     private fun hideFloatingActionButton() {
-        // Ocultar el FAB para que no se superponga al contenido
         try {
-            val fab = activity?.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab)
+            val fab = activity?.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
+                R.id.fab
+            )
             fab?.visibility = View.GONE
-        } catch (e: Exception) {
-            // Si no encuentra el FAB, no hacer nada
+        } catch (_: Exception) {
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Asegurarse de que el FAB esté oculto cada vez que se regresa al fragment
         hideFloatingActionButton()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Mostrar el FAB nuevamente cuando se salga del fragment para otros fragments
         try {
-            val fab = activity?.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab)
+            val fab = activity?.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
+                R.id.fab
+            )
             fab?.visibility = View.VISIBLE
-        } catch (e: Exception) {
-            // Si no encuentra el FAB, no hacer nada
+        } catch (_: Exception) {
         }
         _binding = null
     }
-
 }

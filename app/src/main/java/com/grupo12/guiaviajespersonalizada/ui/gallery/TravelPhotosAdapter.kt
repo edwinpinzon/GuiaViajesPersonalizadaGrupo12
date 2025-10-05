@@ -1,5 +1,6 @@
 package com.grupo12.guiaviajespersonalizada.ui.gallery
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.grupo12.guiaviajespersonalizada.R
 
 class TravelPhotosAdapter(
@@ -24,27 +26,39 @@ class TravelPhotosAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_travel_photo, parent, false) // ✅ tu layout personalizado
+            .inflate(R.layout.item_travel_photo, parent, false)
         return PhotoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val photo = photos[position]
 
-        // Asignar datos de TravelPhoto a los views
-        holder.ivPhoto.setImageResource(photo.imageRes)
+        // ✅ Mostrar imagen: primero intenta con URI, luego con recurso local
+        if (photo.imageUri != null) {
+            Glide.with(holder.itemView.context)
+                .load(photo.imageUri)
+                .placeholder(R.drawable.ic_image_placeholder)
+                .centerCrop()
+                .into(holder.ivPhoto)
+        } else if (photo.imageRes != null) {
+            holder.ivPhoto.setImageResource(photo.imageRes)
+        } else {
+            holder.ivPhoto.setImageResource(R.drawable.ic_image_placeholder)
+        }
+
+        // ✅ Asignar texto
         holder.tvTitle.text = photo.title
         holder.tvLocation.text = photo.location
         holder.tvDate.text = photo.date
+
+        // ✅ Estado del favorito
         holder.btnFavorite.setImageResource(
             if (photo.isFavorite) R.drawable.ic_favorite_filled
             else R.drawable.ic_favorite_border
         )
 
-        // Click en toda la card (ver detalles)
+        // ✅ Acciones
         holder.itemView.setOnClickListener { onActionClick(photo, PhotoAction.VIEW) }
-
-        // Click en botón favorito
         holder.btnFavorite.setOnClickListener { onActionClick(photo, PhotoAction.FAVORITE) }
     }
 

@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
     tools:context=".ui.home.HomeFragment">
+
+    <!-- 🌄 Fondo dinámico (Unsplash) -->
+    <ImageView
+        android:id="@+id/ivBackgroundImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:alpha="0.25"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
 
     <!-- ScrollView principal -->
     <ScrollView
@@ -13,6 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +103,8 @@
                             android:layout_height="wrap_content"
                             android:hint="¿A dónde quieres ir?"
                             android:inputType="text"
-                            android:textSize="16sp" />
-
+                            android:textSize="16sp"
+                            android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Campo "¿Cuándo?" -->
@@ -115,8 +129,8 @@
                             android:layout_height="wrap_content"
                             android:hint="¿Cuándo?"
                             android:inputType="date"
-                            android:textSize="14sp" />
-
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Campo "Viajeros" -->
@@ -141,8 +155,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Viajeros"
                             android:inputType="number"
-                            android:textSize="14sp" />
-
+                            android:textSize="14sp"
+                            android:textColor="#000000" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Chips de búsqueda rápida -->
@@ -195,7 +209,6 @@
                             android:textSize="12sp"
                             app:chipBackgroundColor="@color/blue_light"
                             app:chipStrokeColor="@color/blue_primary" />
-
                     </com.google.android.material.chip.ChipGroup>
 
                     <!-- Botón de búsqueda -->
@@ -224,213 +237,46 @@
                         app:layout_constraintStart_toStartOf="@id/btn_search_destinations"
                         app:layout_constraintTop_toTopOf="@id/btn_search_destinations"
                         app:layout_constraintBottom_toBottomOf="@id/btn_search_destinations" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Sección de destinos populares -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_popular_destinations"
+            <!-- 🔹 SECCIÓN DE DESTINOS POPULARES -->
+            <TextView
+                android:id="@+id/tv_popular_destinations_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="🌟 Destinos Populares"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/blue_primary"
                 android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_search"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_search">
+                app:layout_constraintEnd_toStartOf="@id/btn_view_all_destinations" />
 
-                <TextView
-                    android:id="@+id/tv_popular_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="🌟 Destinos Populares"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/blue_primary"
-                    app:layout_constraintEnd_toStartOf="@id/btn_view_all_destinations"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/btn_view_all_destinations"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ver todos"
+                android:textColor="@color/blue_primary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_popular_destinations_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_popular_destinations_title" />
 
-                <Button
-                    android:id="@+id/btn_view_all_destinations"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ver Todos"
-                    android:textColor="@color/blue_accent"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <!-- RecyclerView para destinos populares -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_popular_destinations"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    android:clipToPadding="false"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_popular_title"
-                    tools:listitem="@layout/item_destination_card" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Card de estadísticas/info adicional -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_travel_stats"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_popular_destinations"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="20dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
-                app:cardBackgroundColor="@color/blue_light"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_popular_destinations_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_popular_destinations">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:id="@+id/tv_stats_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="📊 TravelPal en números"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/blue_primary"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layout_stats_numbers"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_stats_title">
-
-                        <!-- Stat 1 -->
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/stat_destinations"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="@id/stat_travelers"
-                            app:layout_constraintHorizontal_chainStyle="spread"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                android:id="@+id/tv_destinations_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="200+"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/blue_primary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Destinos"
-                                android:textSize="12sp"
-                                android:textColor="@color/blue_secondary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_destinations_count" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <!-- Stat 2 -->
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/stat_travelers"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toStartOf="@id/stat_reviews"
-                            app:layout_constraintStart_toEndOf="@id/stat_destinations"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                android:id="@+id/tv_travelers_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="50K+"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/blue_primary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Viajeros"
-                                android:textSize="12sp"
-                                android:textColor="@color/blue_secondary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_travelers_count" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <!-- Stat 3 -->
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/stat_reviews"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/stat_travelers"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <TextView
-                                android:id="@+id/tv_reviews_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="25K+"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/blue_primary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Reseñas"
-                                android:textSize="12sp"
-                                android:textColor="@color/blue_secondary"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tv_reviews_count" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:listitem="@layout/item_destination_card" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

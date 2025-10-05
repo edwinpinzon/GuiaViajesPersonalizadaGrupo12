@@ -2,6 +2,8 @@ package com.grupo12.guiaviajespersonalizada.ui.gallery
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -9,12 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.grupo12.guiaviajespersonalizada.R
 import com.grupo12.guiaviajespersonalizada.databinding.FragmentGalleryBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
+import java.io.FileOutputStream
 
 class GalleryFragment : Fragment() {
 
@@ -22,7 +28,8 @@ class GalleryFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var photosAdapter: TravelPhotosAdapter
-    private val photosList = mutableListOf<TravelPhoto>()
+    private val allPhotos = mutableListOf<TravelPhoto>()
+    private var currentFilter = PhotoFilter.ALL
 
     private val takePhotoLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -51,9 +58,8 @@ class GalleryFragment : Fragment() {
         return root
     }
 
-    // 🔹 Ahora fijo en LISTA (1 columna)
     private fun setupRecyclerView() {
-        photosAdapter = TravelPhotosAdapter(photosList) { photo, action ->
+        photosAdapter = TravelPhotosAdapter(allPhotos) { photo, action ->
             when (action) {
                 PhotoAction.VIEW -> viewPhotoDetail(photo)
                 PhotoAction.EDIT -> editPhoto(photo)
@@ -63,9 +69,8 @@ class GalleryFragment : Fragment() {
             }
         }
 
-        val layoutManager = GridLayoutManager(requireContext(), 1) // 👈 LISTA
         binding.rvPhotos.apply {
-            this.layoutManager = layoutManager
+            layoutManager = GridLayoutManager(requireContext(), 1)
             adapter = photosAdapter
             setHasFixedSize(true)
         }
@@ -93,7 +98,7 @@ class GalleryFragment : Fragment() {
             ),
             TravelPhoto(
                 id = 2,
-                    title = "Templo Senso-ji",
+                title = "Templo Senso-ji",
                 description = "Templo tradicional en Asakusa",
                 location = "Tokio, Japón",
                 date = "2025-09-20",
@@ -104,9 +109,9 @@ class GalleryFragment : Fragment() {
             )
         )
 
-        photosList.addAll(samplePhotos)
-        photosAdapter.notifyDataSetChanged()
-        updatePhotosCounter()
+        allPhotos.clear()
+        allPhotos.addAll(samplePhotos)
+        updatePhotosList()
     }
 
     private fun showPhotoSourceDialog() {
@@ -135,43 +140,58 @@ class GalleryFragment : Fragment() {
     }
 
     private fun handleCameraResult(data: Intent?) {
-        val newPhoto = TravelPhoto(
-            id = System.currentTimeMillis().toInt(),
-            title = "Nueva foto ${photosList.size + 1}",
-            description = "Capturada con la cámara",
-            location = "Ubicación actual",
-            date = "2025-09-22",
-            imageRes = R.drawable.ic_image_placeholder,
-            isFavorite = false,
-            tags = listOf("Nueva", "Cámara"),
-            cameraInfo = "Cámara del dispositivo"
-        )
-        addPhotoToList(newPhoto)
+        val photoBitmap = data?.extras?.get("data") as? Bitmap
+        if (photoBitmap != null) {
+            val uri = saveImageToCache(photoBitmap)
+
+            val newPhoto = TravelPhoto(
+                id = System.currentTimeMillis().toInt(),
+                title = "Foto tomada ${allPhotos.size + 1}",
+                description = "Capturada con la cámara",
+                location = "Ubicación actual",
+                date = "2025-09-22",
+                imageUri = uri,
+                isFavorite = false,
+                tags = listOf("Nueva", "Cámara"),
+                cameraInfo = "Cámara del dispositivo"
+            )
+            allPhotos.add(0, newPhoto)
+            updatePhotosList()
+            Snackbar.make(binding.root, "📸 Foto agregada exitosamente", Snackbar.LENGTH_LONG)
+                .setAction("Ver") { viewPhotoDetail(newPhoto) }
+                .show()
+        }
     }
 
-    private fun handleGalleryResult(uri: android.net.Uri) {
+    private fun handleGalleryResult(uri: Uri) {
         val newPhoto = TravelPhoto(
             id = System.currentTimeMillis().toInt(),
-            title = "Foto importada ${photosList.size + 1}",
+            title = "Foto importada ${allPhotos.size + 1}",
             description = "Seleccionada desde la galería",
             location = "Galería del dispositivo",
             date = "2025-09-22",
-            imageRes = R.drawable.ic_image_placeholder,
+            imageUri = uri,
             isFavorite = false,
             tags = listOf("Importada", "Galería"),
             cameraInfo = "Galería"
         )
-        addPhotoToList(newPhoto)
+        allPhotos.add(0, newPhoto)
+        updatePhotosList()
+        Snackbar.make(binding.root, "🖼️ Foto importada correctamente", Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun addPhotoToList(photo: TravelPhoto) {
-        photosList.add(0, photo)
-        photosAdapter.notifyItemInserted(0)
-        binding.rvPhotos.scrollToPosition(0)
-        Snackbar.make(binding.root, "📸 Foto agregada exitosamente", Snackbar.LENGTH_LONG)
-            .setAction("Ver") { viewPhotoDetail(photo) }
-            .show()
-        updatePhotosCounter()
+    private fun saveImageToCache(bitmap: Bitmap): Uri {
+        val cachePath = File(requireContext().cacheDir, "images")
+        cachePath.mkdirs()
+        val file = File(cachePath, "photo_${System.currentTimeMillis()}.jpg")
+        val stream = FileOutputStream(file)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        stream.close()
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            file
+        )
     }
 
     private fun viewPhotoDetail(photo: TravelPhoto) {
@@ -204,18 +224,13 @@ class GalleryFragment : Fragment() {
             .setTitle("Eliminar foto")
             .setMessage("¿Quieres eliminar '${photo.title}'?")
             .setPositiveButton("Eliminar") { _, _ ->
-                val position = photosList.indexOf(photo)
-                if (position != -1) {
-                    photosList.removeAt(position)
-                    photosAdapter.notifyItemRemoved(position)
-                    updatePhotosCounter()
-                    Snackbar.make(binding.root, "Foto eliminada", Snackbar.LENGTH_LONG)
-                        .setAction("Deshacer") {
-                            photosList.add(position, photo)
-                            photosAdapter.notifyItemInserted(position)
-                            updatePhotosCounter()
-                        }.show()
-                }
+                allPhotos.remove(photo)
+                updatePhotosList()
+                Snackbar.make(binding.root, "Foto eliminada", Snackbar.LENGTH_LONG)
+                    .setAction("Deshacer") {
+                        allPhotos.add(photo)
+                        updatePhotosList()
+                    }.show()
             }
             .setNegativeButton("Cancelar", null)
             .show()
@@ -243,34 +258,33 @@ class GalleryFragment : Fragment() {
 
     private fun toggleFavorite(photo: TravelPhoto) {
         photo.isFavorite = !photo.isFavorite
-        val position = photosList.indexOf(photo)
-        if (position != -1) photosAdapter.notifyItemChanged(position)
+        updatePhotosList()
         val message = if (photo.isFavorite) "💖 Agregada a favoritos" else "Removida de favoritos"
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun filterPhotos(filter: PhotoFilter) {
-        val filtered = when (filter) {
-            PhotoFilter.ALL -> photosList
-            PhotoFilter.FAVORITES -> photosList.filter { it.isFavorite }
-            PhotoFilter.RECENT -> photosList.takeLast(10)
-        }
+        currentFilter = filter
         binding.chipAllPhotos.isChecked = filter == PhotoFilter.ALL
         binding.chipFavorites.isChecked = filter == PhotoFilter.FAVORITES
         binding.chipRecent.isChecked = filter == PhotoFilter.RECENT
-        updatePhotosList(filtered)
+        updatePhotosList()
     }
 
-    private fun updatePhotosList(photos: List<TravelPhoto>) {
-        photosList.clear()
-        photosList.addAll(photos)
-        photosAdapter.notifyDataSetChanged()
+    private fun updatePhotosList() {
+        val filtered = when (currentFilter) {
+            PhotoFilter.ALL -> allPhotos
+            PhotoFilter.FAVORITES -> allPhotos.filter { it.isFavorite }
+            PhotoFilter.RECENT -> allPhotos.takeLast(10)
+        }
+
+        photosAdapter.updatePhotos(filtered)
         updatePhotosCounter()
     }
 
     private fun updatePhotosCounter() {
-        val total = photosList.size
-        val favs = photosList.count { it.isFavorite }
+        val total = allPhotos.size
+        val favs = allPhotos.count { it.isFavorite }
         binding.tvPhotosCounter.text = "📸 $total fotos • 💖 $favs favoritos"
     }
 
@@ -280,14 +294,15 @@ class GalleryFragment : Fragment() {
     }
 }
 
-// Data class con tipos de raíz ajustados
+// ✅ Data class actualizada
 data class TravelPhoto(
     val id: Int,
     var title: String,
     var description: String,
     val location: String,
-    val date: String,       // ahora String legible
-    val imageRes: Int,      // drawable
+    val date: String,
+    val imageRes: Int? = null,
+    var imageUri: Uri? = null,
     var isFavorite: Boolean,
     val tags: List<String> = emptyList(),
     val cameraInfo: String = "Desconocida"
